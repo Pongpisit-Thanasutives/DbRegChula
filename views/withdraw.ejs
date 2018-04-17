@@ -5,21 +5,21 @@
 }) %>
 
 <%- include('common/header', {
-  heading: 'Withdraw',
-  subheading: 'เกี่ยวกับเว็บไซต์',
+  heading: 'ถอนรายวิชา',
+  subheading: 'กรุณาใส่รหัสวิชาที่ต้องการถอน',
   breadcrumb: [
     'withdraw'
   ]
 }) %>
 
 <div class="container">
-<h1>Hello withdraw</h1>
+<form action="/withdraw" method="POST">
 
-<p>
-<%= user %>
-</p>
+	Course number <input type="text" name="course_no"><br>
+	<input type="submit" value="Submit">
+
+</form>
 </div>
-
 
 <%- include('common/view_end', {
   jsFiles: ['manager-board']

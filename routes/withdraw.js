@@ -12,7 +12,7 @@ router.get('/', function(req, res){
 
 router.post('/', function(req, res){
 	var course_no = req.body.course_no;
-	var sid = req.body.sid;
+	var sid = req.user.id;
 
 	var sql = 'delete from enrollment where sid = ' + sid + ' and course_no = ' + course_no + ';';
 
@@ -21,7 +21,7 @@ router.post('/', function(req, res){
 	    	return next(err)
 		}
 		console.log('Number of records deleted: ' + result.affectedRows);
-		res.send('delete successfully')
+		res.send('ถอนรายวิชา ' + course_no + ' แล้ว');
 	});
 });
 
