@@ -1,0 +1,26 @@
+<%- include('common/view_start', {
+  title: 'Withdraw',
+  cssFiles: [],
+  navBarLocation: 'withdraw'
+}) %>
+
+<%- include('common/header', {
+  heading: 'Withdraw',
+  subheading: 'เกี่ยวกับเว็บไซต์',
+  breadcrumb: [
+    'withdraw'
+  ]
+}) %>
+
+<div class="container">
+<h1>Hello withdraw</h1>
+
+<p>
+<%= user %>
+</p>
+</div>
+
+
+<%- include('common/view_end', {
+  jsFiles: ['manager-board']
+}) %>

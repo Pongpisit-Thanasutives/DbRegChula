@@ -26,7 +26,6 @@ router.get('/logout', (req, res) => {
 
 router.use('/student-info', requireLogin, studentInfoRoute);
 router.use('/manager-board', requireLogin, requireManagerRole, managerBoardRoute);
-router.use('/advisor', requireLogin, requireAdvisorRole, advisorRoute);
 router.use('/course', requireLogin, courseRoute);
 router.use('/about', requireLogin, aboutRoute);
 router.use('/enroll', requireLogin, enrollRoute);
