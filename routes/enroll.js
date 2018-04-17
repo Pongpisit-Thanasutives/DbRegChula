@@ -3,6 +3,12 @@ const router = express.Router();
 const db = require('../db');
 const moment = require('moment');
 
+router.get('/addanddelete', function(req, res){
+  res.render('addanddelete', {
+    user: req.user
+  });
+});
+
 router.post('/detail', function(req, res) {
   let sql = `SELECT created_time, edited_time, e.course_no, grade, credit, shortname FROM enrollment e inner join course c on e.course_no = c.course_no
   where e.sid = ? AND e.year = ? AND e.semester = ?`;
