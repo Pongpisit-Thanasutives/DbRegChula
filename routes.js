@@ -38,13 +38,15 @@ router.use('/register', requireLogin, registerRoute);
 
 // We use this trick to show login warning only if user does not come from '/' URL.
 router.get('/', requireLoginNoWarning, (req, res, next) => {
-  if (req.user.type === 'A') {
-    res.redirect('/student-info');
-  } else if (req.user.type === 'M') {
-    res.redirect('/student-info');
-  } else {
-    next();
-  }
+  res.redirect('/student-info');
+  next();
+  // if (req.user.type === 'A') {
+  //   res.redirect('/student-info');
+  // } else if (req.user.type === 'M') {
+  //   res.redirect('/student-info');
+  // } else {
+  //   next();
+  // }
 });
 router.use('/', requireLogin);
 

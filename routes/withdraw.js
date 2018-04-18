@@ -12,9 +12,12 @@ router.get('/', function(req, res){
 
 router.post('/', function(req, res){
 	var course_no = req.body.course_no;
-	var sid = req.user.id;
+	var sid = req.user.StudentID;
 
-	var sql = 'delete from enrollment where sid = ' + sid + ' and course_no = ' + course_no + ';';
+	// console.log(sid);
+	// console.log(course_no)
+
+	var sql = 'delete from study where StudentIDl2 = ' + sid + ' and CourseIDl2 = ' + course_no + ';';
 
 	db.query(sql, function (err, result) {
 	    if (err) {
