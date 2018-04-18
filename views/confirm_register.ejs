@@ -1,0 +1,61 @@
+<%- include('common/view_start', {
+  title: 'Register',
+  cssFiles: [],
+  navBarLocation: 'register'
+}) %>
+
+<%- include('common/header', {
+  heading: 'Confirm Register',
+  subheading: 'ยืนยันการลงทะเบียนเรียน',
+  breadcrumb: [
+    'Register'
+  ]
+}) %>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Course ID</th>
+        <th scope="col">Course Name</th>
+        <th scope="col">Section</th>
+        <th scope="col">Credit(s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>2110316</td>
+        <td>PROG LANG PRIN</td>
+        <td>33</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>2110352</td>
+        <td>COMP SYS ARCH</td>
+        <td>1</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>2110263</td>
+        <td>DIG LOGIC LAB I</td>
+        <td>2</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td></td>
+        <td></td>
+        <td><b>Total:</b></td>
+        <td><b>7</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%- include('common/view_end', {
+  jsFiles: ['']
+}) %>
