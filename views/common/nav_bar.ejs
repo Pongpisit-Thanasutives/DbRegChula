@@ -16,43 +16,43 @@
         <% if (typeof user !== "undefined") { %>
 
           <% if (user.type === 'M') { %>
-            <% if (location === 'manager-board') { %>
-            <li class="active"><a href="/manager-board">Manager Board <span class="sr-only">(current)</span></a></li>
+            <% if (location === 'student-info') { %>
+            <li class="active"><a href="/student-info">Student Profile <span class="sr-only">(current)</span></a></li>
             <% } else { %>
-            <li><a href="/manager-board">Manager Board</a></li>
+            <li><a href="/student-info">Student Profile</a></li>
             <% } %>
           <% } %>
 
           <% if (user.type === 'A') { %>
-            <% if (location === 'advisor') { %>
-            <li class="active"><a href="/advisor">Advisor <span class="sr-only">(current)</span></a></li>
+            <% if (location === 'student-info') { %>
+            <li class="active"><a href="/student-info">Student Profile <span class="sr-only">(current)</span></a></li>
             <% } else { %>
-            <li><a href="/advisor">Advisor</a></li>
+            <li><a href="/student-info">Student Profile</a></li>
             <% } %>
           <% } %>
 
-          <% if (location === 'student-info') { %>
-          <li class="active"><a href="/student-info">Student Info <span class="sr-only">(current)</span></a></li>
+          <% if (location === 'register') { %>
+          <li class="active"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
           <% } else { %>
-          <li><a href="/student-info">Student Info</a></li>
-          <% } %>
-
-          <% if (location === 'course') { %>
-          <li class="active"><a href="/course">Course <span class="sr-only">(current)</span></a></li>
-          <% } else { %>
-          <li><a href="/course">Course</a></li>
-          <% } %>
-
-          <% if (location === 'about') { %>
-          <li class="active"><a href="/about">About <span class="sr-only">(current)</span></a></li>
-          <% } else { %>
-          <li><a href="/about">About</a></li>
+          <li><a href="/register">Register</a></li>
           <% } %>
 
           <% if (location === 'withdraw') { %>
           <li class="active"><a href="/withdraw">Withdraw <span class="sr-only">(current)</span></a></li>
           <% } else { %>
           <li><a href="/withdraw">Withdraw</a></li>
+          <% } %>
+
+          <% if (location === 'addanddelete') { %>
+          <li class="active"><a href="/addanddelete">Add/Delete Course <span class="sr-only">(current)</span></a></li>
+          <% } else { %>
+          <li><a href="/addanddelete">Add/Delete Course</a></li>
+          <% } %>
+
+          <% if (location === 'course') { %>
+          <li class="active"><a href="/course">Course <span class="sr-only">(current)</span></a></li>
+          <% } else { %>
+          <li><a href="/course">Course</a></li>
           <% } %>
 
         <% } %>
