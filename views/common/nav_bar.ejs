@@ -55,6 +55,12 @@
           <li><a href="/course">Course</a></li>
           <% } %>
 
+          <% if (location === 'tuitionfee') { %>
+          <li class="active"><a href="/tuitionfee">Tuition fee <span class="sr-only">(current)</span></a></li>
+          <% } else { %>
+          <li><a href="/tuitionfee">Tuition fee </a></li>
+          <% } %>
+
         <% } %>
       </ul>
       <ul class="nav navbar-nav navbar-right">

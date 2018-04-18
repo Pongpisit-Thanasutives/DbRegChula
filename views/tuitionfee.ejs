@@ -1,0 +1,34 @@
+<%- include('common/view_start', {
+  title: 'Tuition fee',
+  cssFiles: [],
+  navBarLocation: 'tuitionfee'
+}) %>
+
+<%- include('common/header', {
+  heading: 'แสดงผลการชำระค่าเล่นเรียน',
+  subheading: '',
+  breadcrumb: [
+    'Tuition fee'
+  ]
+}) %>
+
+<div class="container">
+	<h3>ข้อมูลทั่วไปของนิสิต</h3>
+	<pre><b>ชื่อ</b> นาย ปณายุ คีลาวัฒน์</pre>
+	<pre><b>ระดับ</b> ปริญญาตรี</pre>
+	<pre><b>คณะ</b> วิศวกรรมศาสตร <b>ภาควิชา</b> คอมพิวเตอร์</pre>
+	<pre><b>หลักสูตร</b> 1933 วิศวกรรมศาสตรบัณฑิต วิศวกรรมคอมพิวเตอร์</pre>
+	<hr>
+	<h3>ค่าเล่าเรียน</h3>
+	<pre><b>เทอม/ปี</b> 2/2017</pre>
+	<pre><b>ทั้งหมด</b> 21000.0 บาท</pre>
+	<pre><b>ชำระแล้ว</b> 21000.0 บาท</pre>
+	<pre><b>ค้างชำระ</b> 0.0 บาท</pre>
+	<hr>
+	<h3>วิธีการชำระ</h3>
+	<pre>ผ่านการหักจากเงินฝากธนาคาร</pre>
+</div>
+
+<%- include('common/view_end', {
+  jsFiles: ['manager_board']
+}) %>
