@@ -13,50 +13,67 @@
   ]
 }) %>
 
+<style>
+div.relative {
+    position: relative;
+    left: 45px;
+}
+</style>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+    height: 500px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 17.5%;
+}
+
+.right {
+  width: 82.5%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+</style>
+
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-5 col-md-4">
-      <%- include('search_student') %>
-    </div>
-    <div class="col-xs-12 col-sm-7 col-md-8">
-      <section class="search-result">
-        <% if (searched) { %>
-          <h2>Result</h2>
-          <ul>
-          <% if (searchOptions.sid.length > 0) { %>
-            <li>ID: <%= searchOptions.sid %></li>
-          <% } if (searchOptions.sfname.length > 0) { %>
-            <li>First Name: <%= searchOptions.sfname %></li>
-          <% } if (searchOptions.slname.length > 0) { %>
-            <li>Last Name: <%= searchOptions.slname %></li>
-          <% } %>
-          </ul>
 
-          <table class="table table-striped" id="search_result">
-            <thead>
-              <tr>
-                <th>Student ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Year</th>
-                <th>Behavior Score</th>
-                <th>Full Info</th>
-              </tr>
-            </thead>
-          </table>
-
-          <script>
-            var searchOptions = <%- JSON.stringify(searchOptions) %>;
-          </script>
-
-        <% } else {%>
-          <p class="no-search-text">
-            Please search using the search form on the left.
-          </p>
-        <% } %>
-      </section>
+  <div class="column left" style="background-color:#aaa;">
+    <img src="/static/img/oat.png" style=" height: 240px; width: 180px; margin-top: -3px">
+    <div class="relative">
+    <h3>รูปนิสิต</h3>
     </div>
   </div>
+
+  <div class="column right" style="background-color:#bbb;">
+  <p>ชื่อ แบก</p>
+  <p>นามสกุล หลังหัก</p>
+  <p>เพศ ชาย</p>
+  <p>เลขประจำตัวประชาชน 11037XXXXXXXX</p>
+  <p>รหัสนิสิต 58303XXXXX</p>
+  <p>ระดับการศึกษา ปริญญาตรี</p>
+  <p>ชั้นปี 3</p>
+  <p>คณะ วิศวกรรมศาสตร์</p>
+  <p>ภาควิชา คอมพิวเตอร์</p>
+  <p>กรุ๊ปเลือด B</p>
+  <p>ที่อยู่ ดาวโลก</p>
+  <p>อีเมลล์ Oatza.H@chula.ac.th</p>
+  </div>
+  
+</div>
 </div>
 
 <%- include('../common/view_end', {
