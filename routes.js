@@ -32,12 +32,9 @@ router.use('/manager-board', requireLogin, requireManagerRole, managerBoardRoute
 router.use('/course', requireLogin, courseRoute);
 router.use('/enroll', requireLogin, enrollRoute);
 router.use('/withdraw', requireLogin, withdrawRoute);
-<<<<<<< HEAD
 router.use('/tuitionfee', requireLogin, tuitionfeeRoute);
-=======
 router.use('/addanddelete', requireLogin, addAndDeleteRoute);
 router.use('/register', requireLogin, registerRoute);
->>>>>>> e9f5bf4632cc864094efec36b33050d887233b69
 
 // We use this trick to show login warning only if user does not come from '/' URL.
 router.get('/', requireLoginNoWarning, (req, res, next) => {
