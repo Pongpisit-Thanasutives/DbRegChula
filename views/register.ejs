@@ -1,0 +1,88 @@
+<%- include('common/view_start', {
+  title: 'Register',
+  cssFiles: [],
+  navBarLocation: 'register'
+}) %>
+
+<%- include('common/header', {
+  heading: 'Register',
+  subheading: 'ลงทะเบียนเรียน',
+  breadcrumb: [
+    'Register'
+  ]
+}) %>
+
+<script>
+$(document).ready(function(){
+
+    var counter = 2;
+
+    $("#addButton").click(function () {
+
+    if(counter>10){
+            alert("Only 10 textboxes allow");
+            return false;
+    }
+
+    var newTextBoxDiv = $(document.createElement('div'))
+         .attr("id", 'TextBoxDiv' + counter)
+         .attr("class", 'form-group');
+
+    newTextBoxDiv.after().html('<label class="col-sm-2 control-label">Course ID #'+ counter + ': </label>' +
+          '<div class="col-sm-10"><input class="form-control" type="text" name="textbox' + counter +
+          '" ' + counter + '></div>'
+          +'<label class="col-sm-2 control-label">Section #'+counter+': </label>'
+          +'<div class="col-sm-10"><input class="form-control" type="text"></div>'
+        );
+
+    newTextBoxDiv.appendTo("#formInput");
+
+
+    counter++;
+     });
+
+     $("#removeButton").click(function () {
+    if(counter==1){
+          alert("No more textbox to remove");
+          return false;
+       }
+
+    counter--;
+
+        $("#TextBoxDiv" + counter).remove();
+
+     });
+
+     $("#getButtonValue").click(function () {
+
+    var msg = 'Are you sure you want to proceed?';
+          alert(msg);
+     });
+  });
+
+</script>
+
+<div class="container">
+  <h2>Register Course</h2>
+  <form class="form-horizontal">
+    <div id="formInput">
+      <div class="form-group" id="TextBoxDiv1">
+        <label class="col-sm-2 control-label">Course ID #1 :</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text">
+        </div>
+        <label class="col-sm-2 control-label">Section #1 :</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text">
+        </div>
+      </div>
+    </div>
+    <input type='button' class="btn btn-md btn-primary" value='Add Input' id='addButton'>
+    <input type='button' class="btn btn-md btn-primary" value='Remove Input' id='removeButton'>
+    <input type='button' class="btn btn-md btn-success" value='Submit' id='getButtonValue'>
+  </form>
+</div>
+
+<%- include('common/view_end', {
+  jsFiles: ['']
+}) %>

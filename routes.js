@@ -16,6 +16,7 @@ const aboutRoute = require('./routes/about');
 const enrollRoute = require('./routes/enroll');
 const withdrawRoute = require('./routes/withdraw');
 const addAndDeleteRoute = require('./routes/add_and_delete');
+const registerRoute = require('./routes/register');
 
 const router = express.Router();
 
@@ -31,6 +32,7 @@ router.use('/course', requireLogin, courseRoute);
 router.use('/enroll', requireLogin, enrollRoute);
 router.use('/withdraw', requireLogin, withdrawRoute);
 router.use('/addanddelete', requireLogin, addAndDeleteRoute);
+router.use('/register', requireLogin, registerRoute);
 
 // We use this trick to show login warning only if user does not come from '/' URL.
 router.get('/', requireLoginNoWarning, (req, res, next) => {
