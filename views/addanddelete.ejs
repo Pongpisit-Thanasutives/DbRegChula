@@ -1,21 +1,139 @@
 <%- include('common/view_start', {
-  title: 'About',
-  cssFiles: [],
-  navBarLocation: 'about'
+  title: 'Add-Delete Course',
+  cssFiles: ['addanddelete'],
+  navBarLocation: 'addanddelete'
 }) %>
 
 <%- include('common/header', {
-  heading: 'About',
-  subheading: 'เกี่ยวกับเว็บไซต์',
+  heading: 'Add-Delete Course',
+  subheading: 'เพิ่ม-ลด วิชาเรียน',
   breadcrumb: [
-    'About'
+    'Add-Delete Course'
   ]
 }) %>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    var counter = 2;
+
+    $("#addButton").click(function () {
+
+    if(counter>10){
+            alert("Only 10 textboxes allow");
+            return false;
+    }
+
+    var newTextBoxDiv = $(document.createElement('div'))
+         .attr("id", 'TextBoxDiv' + counter)
+         .attr("class", 'form-group');
+
+    newTextBoxDiv.after().html('<label class="col-sm-2 control-label">Course ID #'+ counter + ': </label>' +
+          '<div class="col-sm-10"><input class="form-control" type="text" name="textbox' + counter +
+          '" ' + counter + '></div>');
+
+    newTextBoxDiv.appendTo("#formInput");
+
+
+    counter++;
+     });
+
+     $("#removeButton").click(function () {
+    if(counter==1){
+          alert("No more textbox to remove");
+          return false;
+       }
+
+    counter--;
+
+        $("#TextBoxDiv" + counter).remove();
+
+     });
+
+     $("#getButtonValue").click(function () {
+
+    var msg = 'Are you sure you want to proceed?';
+          alert(msg);
+     });
+
+     //====== form number 2 ========
+
+     var counter2 = 2;
+
+     $("#addButton2").click(function () {
+
+     if(counter2>10){
+             alert("Only 10 textboxes allow");
+             return false;
+     }
+
+     var newTextBoxDiv2 = $(document.createElement('div'))
+          .attr("id", 'TextBox2Div' + counter)
+          .attr("class", 'form-group');
+
+     newTextBoxDiv2.after().html('<label class="col-sm-2 control-label">Course ID #'+ counter2 + ': </label>' +
+           '<div class="col-sm-10"><input class="form-control" type="text" name="textbox' + counter2 +
+           '" ' + counter2 + '></div>');
+
+     newTextBoxDiv2.appendTo("#formInput2");
+
+
+     counter2++;
+      });
+
+      $("#removeButton2").click(function () {
+     if(counter2==1){
+           alert("No more textbox to remove");
+           return false;
+        }
+
+     counter2--;
+
+         $("#TextBox2Div" + counter2).remove();
+
+      });
+
+      $("#getButtonValue2").click(function () {
+
+     var msg = 'Are you sure you want to proceed?';
+           alert(msg);
+      });
+
+  });
+</script>
 
 <div class="container">
-  
+  <h2>Add Course</h2>
+  <form class="form-horizontal">
+    <div id="formInput">
+      <div class="form-group" id="TextBoxDiv1">
+        <label class="col-sm-2 control-label">Course ID #1 :</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text">
+        </div>
+      </div>
+    </div>
+    <input type='button' class="btn btn-md btn-primary" value='Add Input' id='addButton'>
+    <input type='button' class="btn btn-md btn-primary" value='Remove Input' id='removeButton'>
+    <input type='button' class="btn btn-md btn-success" value='Submit' id='getButtonValue'>
+  </form>
+
+  <h2>Delete Course</h2>
+  <form class="form-horizontal">
+    <div id="formInput2">
+      <div class="form-group" id="TextBox2Div1">
+        <label class="col-sm-2 control-label">Course ID #1 :</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text">
+        </div>
+      </div>
+    </div>
+    <input type='button' class="btn btn-md btn-primary" value='Add Input' id='addButton2'>
+    <input type='button' class="btn btn-md btn-primary" value='Remove Input' id='removeButton2'>
+    <input type='button' class="btn btn-md btn-success" value='Submit' id='getButtonValue2'>
+  </form>
 </div>
 
 <%- include('common/view_end', {
-  jsFiles: ['manager-board']
+  jsFiles: ['']
 }) %>
