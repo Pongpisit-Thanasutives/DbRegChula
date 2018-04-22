@@ -8,4 +8,10 @@ router.get('/', function (req, res) {
   });
 });
 
+router.get('/mock-confirm', function(req, res){
+  res.render('confirm_register', {
+    user: req.user
+  });
+});
+
 module.exports = router;
