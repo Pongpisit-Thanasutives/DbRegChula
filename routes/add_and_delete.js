@@ -26,6 +26,7 @@ router.post('/', function(req, res){
 		}
 	}
 
+	// stuck in loading ???
 	if(req.body['delete_courses'] !== undefined){
 		// Delete
 		var count = 0;
