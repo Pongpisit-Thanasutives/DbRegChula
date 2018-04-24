@@ -40,13 +40,6 @@ router.use('/register', requireLogin, registerRoute);
 router.get('/', requireLoginNoWarning, (req, res, next) => {
   res.redirect('/student-info');
   next();
-  // if (req.user.type === 'A') {
-  //   res.redirect('/student-info');
-  // } else if (req.user.type === 'M') {
-  //   res.redirect('/student-info');
-  // } else {
-  //   next();
-  // }
 });
 router.use('/', requireLogin);
 
