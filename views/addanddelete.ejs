@@ -51,9 +51,15 @@ $(document).ready(function(){
      });
 
      $("#getButtonValue").click(function () {
-
-    var msg = 'Are you sure you want to proceed?';
-          alert(msg);
+          if (confirm('Your text here')) {
+            console.log("USER CLICKS YES");
+            document.getElementById("formInput").submit(() => {
+                console.log("POST METHOD");
+            });
+          }
+          else {
+            console.log("USER CLICKS NO");
+          }
      });
 
      //====== form number 2 ========
@@ -94,22 +100,27 @@ $(document).ready(function(){
       });
 
       $("#getButtonValue2").click(function () {
-
-     var msg = 'Are you sure you want to proceed?';
-           alert(msg);
+          if (confirm('Confirm ?')) {
+            console.log("USER CLICKS YES");
+            document.getElementById("formInput2").submit(() => {
+                console.log("POST METHOD");
+            });
+          }
+          else {
+            console.log("USER CLICKS NO");
+          }
       });
-
   });
 </script>
 
 <div class="container">
   <h2>Add Course</h2>
-  <form class="form-horizontal">
-    <div id="formInput">
+  <form id="formInput" class="form-horizontal" action="/addanddelete" method="POST">
+    <div >
       <div class="form-group" id="TextBoxDiv1">
         <label class="col-sm-2 control-label">Course ID #1 :</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text">
+          <input class="form-control" type="text" name="add_courses">
         </div>
       </div>
     </div>
@@ -119,12 +130,12 @@ $(document).ready(function(){
   </form>
 
   <h2>Delete Course</h2>
-  <form class="form-horizontal">
-    <div id="formInput2">
+  <form id="formInput2" class="form-horizontal" action="/addanddelete" method="POST">
+    <div >
       <div class="form-group" id="TextBox2Div1">
         <label class="col-sm-2 control-label">Course ID #1 :</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text">
+          <input class="form-control" type="text" name="delete_courses">
         </div>
       </div>
     </div>

@@ -8,6 +8,10 @@ router.get('/', function (req, res) {
   });
 });
 
+router.post('/', function(req, res){
+	var sid = req.user.StudentID;
+});
+
 router.get('/mock-confirm', function(req, res){
   res.render('confirm_register', {
     user: req.user
