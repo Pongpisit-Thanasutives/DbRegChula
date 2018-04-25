@@ -54,9 +54,14 @@ $(document).ready(function(){
      });
 
      $("#getButtonValue").click(function () {
-
-    var msg = 'Are you sure you want to proceed?';
-          alert(msg);
+        if (confirm('Confirm ?')) {
+          console.log("USER CLICKS YES");
+          document.getElementById("formInput").submit(() => {
+            console.log("POST METHOD");
+          });
+        }else {
+          console.log("USER CLICKS NO");
+        }
      });
   });
 
@@ -64,16 +69,16 @@ $(document).ready(function(){
 
 <div class="container">
   <h2>Register Course</h2>
-  <form class="form-horizontal">
-    <div id="formInput">
+  <form id="formInput" class="form-horizontal" action="/register" method="POST">
+    <div >
       <div class="form-group" id="TextBoxDiv1">
         <label class="col-sm-2 control-label">Course ID #1 :</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text">
+          <input class="form-control" type="text" name="course_no">
         </div>
         <label class="col-sm-2 control-label">Section #1 :</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text">
+          <input class="form-control" type="text" name="section">
         </div>
       </div>
     </div>
