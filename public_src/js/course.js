@@ -93,26 +93,14 @@ $(document).ready(function() {
       }
     })
     .done(function(result) {
-      //console.log(result);
-      $('#title').html(result.course_no +" "+ result.shortname);
-      $('#name_en').html(result.name_en);
-      $('#name_th').html(result.name_th);
-      $('#shortname').html(result.shortname);
-      $('#department').html(result.fname_th +" (ภาควิชา"+result.dname_th+")");
-      $('#creditset').html(result.credit+" ("+result.subcredit_1+"-"+result.subcredit_2+"-"+result.subcredit_3+")");
-      $('#course_detail').html(result.course_detail);
-      switch(result.special_type){
-        case '0': $('#special_type').html("ทั่วไป"); break;
-        case '1': $('#special_type').html("กลุ่มวิชามนุษยศาสตร์"); break;
-        case '2': $('#special_type').html("กลุ่มวิชาวิทยาศาสตร์คณิตศาสตร์"); break;
-        case '3': $('#special_type').html("กลุ่มวิชาสังคมศาสตร์"); break;
-        case '4': $('#special_type').html("กลุ่มวิชาสังคมศาสตร์"); break;
-        case '5': $('#special_type').html("กลุ่มวิชาภาษาต่างประเทศ"); break;
-        case '6': $('#special_type').html("Approved Electives"); break;
-        default:$('#special_type').html("ทั่วไป default");
-      }
-      if(!result.pre_course_no) $('#prerequisite').html("-");
-      else $('#prerequisite').html(result.pre_course_no);
+      console.log(result);
+      $('#title').html(result.CourseID +" "+ result.CourseInitial);
+      $('#name_en').html(result.CourseName);
+      $('#shortname').html(result.CourseInitial);
+      // $('#department').html(result.fname_th +" (ภาควิชา"+result.dname_th+")");
+      $('#creditset').html(result.Credit);
+      // if(!result.pre_course_no) $('#prerequisite').html("-");
+      // else $('#prerequisite').html(result.pre_course_no);
     });
     $.ajax({
       method: "POST",
