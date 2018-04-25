@@ -29,13 +29,13 @@ $(document).ready(function(){
          .attr("class", 'form-group');
 
     newTextBoxDiv.after().html('<label class="col-sm-2 control-label">Course ID #'+ counter + ': </label>' +
-          '<div class="col-sm-10"><input class="form-control" type="text" name="textbox' + counter +
+          '<div class="col-sm-10"><input class="form-control" type="text" name="course_no' + counter +
           '" ' + counter + '></div>'
           +'<label class="col-sm-2 control-label">Section #'+counter+': </label>'
-          +'<div class="col-sm-10"><input class="form-control" type="text"></div>'
+          +'<div class="col-sm-10"><input class="form-control" type="text" name="section'+counter+'"></div>'
         );
 
-    newTextBoxDiv.appendTo("#formInput");
+    newTextBoxDiv.appendTo("#registerGroup");
 
 
     counter++;
@@ -70,15 +70,15 @@ $(document).ready(function(){
 <div class="container">
   <h2>Register Course</h2>
   <form id="formInput" class="form-horizontal" action="/register" method="POST">
-    <div >
+    <div id="registerGroup">
       <div class="form-group" id="TextBoxDiv1">
         <label class="col-sm-2 control-label">Course ID #1 :</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text" name="course_no">
+          <input class="form-control" type="text" name="course_no1">
         </div>
         <label class="col-sm-2 control-label">Section #1 :</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text" name="section">
+          <input class="form-control" type="text" name="section1">
         </div>
       </div>
     </div>

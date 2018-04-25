@@ -21,7 +21,6 @@ router.post('/', function(req, res){
       err_msg: "Empty input is sent"
     });
   }
-
 	if(req.body['add_courses1'] !== undefined){
     var vals = [];
     var promises = [];
