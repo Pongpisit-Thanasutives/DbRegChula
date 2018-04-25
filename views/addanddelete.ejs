@@ -29,10 +29,12 @@ $(document).ready(function(){
          .attr("class", 'form-group');
 
     newTextBoxDiv.after().html('<label class="col-sm-2 control-label">Course ID #'+ counter + ': </label>' +
-          '<div class="col-sm-10"><input class="form-control" type="text" name="textbox' + counter +
-          '" ' + counter + '></div>');
+          '<div class="col-sm-10"><input class="form-control" type="text" name="add_courses' + counter +
+          '" ' + counter + '></div><label class="col-sm-2 control-label">Section #'+counter+':</label>' +
+          '<div class="col-sm-10"><input class="form-control" type="text" name="sections'+counter +
+          '"></div>');
 
-    newTextBoxDiv.appendTo("#formInput");
+    newTextBoxDiv.appendTo("#addCourseGroup");
 
 
     counter++;
@@ -51,7 +53,7 @@ $(document).ready(function(){
      });
 
      $("#getButtonValue").click(function () {
-          if (confirm('Your text here')) {
+          if (confirm('Confirm ?')) {
             console.log("USER CLICKS YES");
             document.getElementById("formInput").submit(() => {
                 console.log("POST METHOD");
@@ -78,10 +80,10 @@ $(document).ready(function(){
           .attr("class", 'form-group');
 
      newTextBoxDiv2.after().html('<label class="col-sm-2 control-label">Course ID #'+ counter2 + ': </label>' +
-           '<div class="col-sm-10"><input class="form-control" type="text" name="textbox' + counter2 +
+           '<div class="col-sm-10"><input class="form-control" type="text" name="delete_courses' + counter2 +
            '" ' + counter2 + '></div>');
 
-     newTextBoxDiv2.appendTo("#formInput2");
+     newTextBoxDiv2.appendTo("#deleteCourseGroup");
 
 
      counter2++;
@@ -116,11 +118,15 @@ $(document).ready(function(){
 <div class="container">
   <h2>Add Course</h2>
   <form id="formInput" class="form-horizontal" action="/addanddelete" method="POST">
-    <div >
+    <div id="addCourseGroup">
       <div class="form-group" id="TextBoxDiv1">
-        <label class="col-sm-2 control-label">Course ID #1 :</label>
+        <label class="col-sm-2 control-label">Course ID #1:</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text" name="add_courses">
+          <input class="form-control" type="text" name="add_courses1">
+        </div>
+        <label class="col-sm-2 control-label">Section #1:</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" name="sections1">
         </div>
       </div>
     </div>
@@ -131,11 +137,11 @@ $(document).ready(function(){
 
   <h2>Delete Course</h2>
   <form id="formInput2" class="form-horizontal" action="/addanddelete" method="POST">
-    <div >
-      <div class="form-group" id="TextBox2Div1">
-        <label class="col-sm-2 control-label">Course ID #1 :</label>
+    <div id="deleteCourseGroup">
+      <div class="form-group" id="TextBox2Div">
+        <label class="col-sm-2 control-label">Course ID #1:</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text" name="delete_courses">
+          <input class="form-control" type="text" name="delete_courses1">
         </div>
       </div>
     </div>
