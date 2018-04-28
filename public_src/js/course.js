@@ -94,13 +94,12 @@ $(document).ready(function() {
     })
     .done(function(result) {
       console.log(result);
-      $('#title').html(result.CourseID +" "+ result.CourseInitial);
-      $('#name_en').html(result.CourseName);
-      $('#shortname').html(result.CourseInitial);
-      // $('#department').html(result.fname_th +" (ภาควิชา"+result.dname_th+")");
-      $('#creditset').html(result.Credit);
-      // if(!result.pre_course_no) $('#prerequisite').html("-");
-      // else $('#prerequisite').html(result.pre_course_no);
+      $('#title').html(result[0].CourseID +" "+ result[0].CourseInitial);
+      $('#name_en').html(result[0].CourseName);
+      $('#shortname').html(result[0].CourseInitial);
+      $('#creditset').html(result[0].Credit);
+      $('#prerequisite').html(result[0].PrecourseIDl5);
+      $('#teachstyle').html(result[0].Teach);
     });
     $.ajax({
       method: "POST",

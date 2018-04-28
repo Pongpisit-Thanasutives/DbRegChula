@@ -24,6 +24,16 @@
               <input type="text" class="form-control" id="course_id" name="cid" placeholder="e.g. 2110200">
               <label for="course_name">Course Name</label>
               <input type="text" class="form-control" id="shortname" name="shortname" placeholder="e.g. DISCRETE STRUC">
+              <label for="course_semester">Semester</label>
+              <select id="semester" class="form-control" name="semester">
+                <option value="2018/2">2018/2</option>
+                <option value="2018/1" selected="selected">2018/1</option>
+                <option value="2017/2">2017/2</option>
+                <option value="2017/1">2017/1</option>
+                <option value="2016/2">2016/2</option>
+                <option value="2016/1">2016/1</option>
+              </select>
+              <input type="text" class="dropdown-menu" id="semester" name="semester" placeholder="2018/1">
           </div>
           <button type="submit" class="btn btn-primary">Search</button>
         </form>
@@ -43,25 +53,25 @@
     <div class="col-md-8">
       <div class="col-xs-12">
         <% if(data.length > 0) {%>
-        <h1 id="title"><%= data[0].ID %> <%= data[0].Initial %></h1>
+        <h1 id="title"> </h1>
         <hr>
         <table class="table table-bordered">
             <tbody>
               <tr>
                 <td class="course_title col-md-2"><b>วิชา</b></td>
-                <td class="course_detail" id="name_en"><%= data[0].name_en %></td>
+                <td class="course_detail" id="name_en"></td>
               </tr>
               <tr>
                 <td class="course_title"><b>หน่วยกิต</b></td>
-                <td class="course_detail" id="creditset"><%= data[0].credit %> (<%= data[0].subcredit_1 %>-<%= data[0].subcredit_2 %>-<%= data[0].subcredit_3 %>)</td>
+                <td class="course_detail" id="creditset"></td>
               </tr>
               <tr>
                 <td class="course_title"><b>วิชาที่ต้องเรียนมาก่อน</b></td>
-                    <% if(!data[0].pre_course_no) {%>
-                      <td class="course_detail" id="prerequisite">-</td>
-                    <% } else { %>
-                      <td class="course_detail" id="prerequisite"><%= data[0].pre_course_no %></td>
-                    <% } %>
+                <td class="course_detail" id="prerequisite"></td>
+              </tr>
+              <tr>
+                <td class="course_title"><b>วิธีการสอน</b></td>
+                <td class="course_detail" id="teachstyle"></td>
               </tr>
             </tbody>
         </table>

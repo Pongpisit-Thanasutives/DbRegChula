@@ -35,6 +35,7 @@ router.use('/withdraw', requireLogin, withdrawRoute);
 router.use('/tuitionfee', requireLogin, tuitionfeeRoute);
 router.use('/addanddelete', requireLogin, addAndDeleteRoute);
 router.use('/register', requireLogin, registerRoute);
+// router.use('/about', aboutRoute);
 
 // We use this trick to show login warning only if user does not come from '/' URL.
 router.get('/', requireLoginNoWarning, (req, res, next) => {

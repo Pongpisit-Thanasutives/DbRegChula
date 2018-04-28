@@ -5,12 +5,21 @@ const dbHelper = require('../db-helper');
 const moment = require('moment');
 
 router.get('/', function(req, res) {
-  const courseID = req.query.cid;
-  const courseName = req.query.shortname;
+  var courseID = req.query.cid;
+  var courseName = req.query.shortname;
   if(courseID && courseID.length > 0 && courseName && courseName.length > 0){
-    let sql =  "SELECT C.CourseID AS ID, C.CourseName AS Name, C.CourseInitial AS Initial, C.Credit FROM COURSE C WHERE C.CourseID LIKE ? AND C.CourseInitial LIKE ? LIMIT 14";
-    let inserts = ['%' + courseID.trim() + '%', '%' + courseName.trim() + '%'];
-    db.query(sql, inserts,
+    courseID = '"%'+req.query.cid.trim()+'%"';
+    courseName = '"%' + req.query.shortname.trim() + '%"';
+    console.log(req.query.semester);
+    var year = req.query.semester[0].split("/")[0];
+    var sem = req.query.semester[0].split("/")[1];
+    // let sql =  "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM COURSE C WHERE C.CourseID LIKE ? AND C.CourseInitial LIKE ? LIMIT 14";
+    // let sql = "SELECT S.CID AS ID, C.CourseInitial AS Initial FROM SECTION S, COURSE C WHERE C.CourseID = S.CID AND C.CourseID LIKE "
+    //           + courseID + "AND C.CourseInitial LIKE "+courseName + " AND S.AcademicYear_section = " + year + " AND Term_section = "
+              // + sem + " LIMIT 14";
+    let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
+              + year + " AND Term_section = "+ sem +" AND C.CourseID LIKE "+courseID+" AND C.CourseInitial LIKE "+courseName+" ORDER BY C.CourseID LIMIT 14";
+    db.query(sql,
       (err, rows) => {
         if (err) {
           console.log(err);
@@ -19,21 +28,28 @@ router.get('/', function(req, res) {
             moment: moment,
             serverTime: moment().format('LLLL'),
             data: [],
+            year: year,
+            sem: sem,
             user: req.user
           });
+          return;
         }
-        console.log(rows);
         res.render('course', {
           searched: true,
           moment: moment,
           serverTime: moment().format('LLLL'),
           data: rows,
+          year: year,
+          sem: sem,
           user: req.user
         });
       }
     );
   } else if(courseID && courseID.length > 0 && !courseName){
-    let sql = "SELECT C.CourseID AS ID, C.CourseName AS Name, C.CourseInitial AS Initial, C.Credit FROM COURSE C WHERE C.CourseID LIKE ? LIMIT 14";
+    var year = req.query.semester[0].split("/")[0];
+    var sem = req.query.semester[0].split("/")[1];
+    let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
+              + year + " AND Term_section = "+ sem +" AND C.CourseID LIKE ? ORDER BY C.CourseID LIMIT 14";
     let inserts = [courseID.trim() + '%'];
     db.query(sql, inserts,
       (err, rows) => {
@@ -44,21 +60,27 @@ router.get('/', function(req, res) {
             moment: moment,
             serverTime: moment().format('LLLL'),
             data: [],
+            year: year,
+            sem: sem,
             user: req.user
           });
         }
-        console.log(rows);
         res.render('course', {
           searched: true,
           moment: moment,
           serverTime: moment().format('LLLL'),
           data: rows,
+          year: year,
+          sem: sem,
           user: req.user
         });
       }
     );
   } else if(!courseID && courseName && courseName.length > 0){
-    let sql = "SELECT C.CourseID AS ID, C.CourseName AS Name, C.CourseInitial AS Initial, C.Credit FROM COURSE C WHERE C.CourseInitial LIKE ? LIMIT 14";
+    var year = req.query.semester[0].split("/")[0];
+    var sem = req.query.semester[0].split("/")[1];
+    let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
+              + year + " AND Term_section = "+ sem +" AND C.CourseInitial LIKE ? ORDER BY C.CourseID LIMIT 14";
     let inserts = ['%' + courseName.trim() + '%'];
     db.query(sql, inserts,
       (err, rows) => {
@@ -72,37 +94,51 @@ router.get('/', function(req, res) {
             user: req.user
           });
         }
-        console.log(rows);
         res.render('course', {
           searched: true,
           moment: moment,
           serverTime: moment().format('LLLL'),
           data: rows,
+          year: year,
+          sem: sem,
           user: req.user
         });
       }
     );
   } else {
-    let sql = "SELECT C.CourseID AS ID, C.CourseName AS Name, C.CourseInitial AS Initial, C.Credit FROM Course C "
-              +"order by C.CourseID"+ " LIMIT 14 ";
+    var year;
+    var sem;
+    if(req.query.semester){
+      year = req.query.semester[0].split("/")[0];
+      sem = req.query.semester[0].split("/")[1];
+    }
+    else{
+      year = 2018;
+      sem = 1;
+    }
+    let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
+              + year + " AND Term_section = "+ sem +" ORDER BY C.CourseID LIMIT 14";
+    console.log(sql);
     db.query(sql,
       (err, rows) => {
         if (err) {
-          console.log(err);
           res.render('course', {
             searched: true,
             moment: moment,
             serverTime: moment().format('LLLL'),
             data: [],
+            year: year,
+            sem: sem,
             user: req.user
           });
         }
-        console.log(rows);
         res.render('course', {
           searched: true,
           moment: moment,
           serverTime: moment().format('LLLL'),
           data: rows,
+          year: year,
+          sem: sem,
           user: req.user
         });
       }
@@ -112,16 +148,16 @@ router.get('/', function(req, res) {
 
 router.post('/detail', function(req, res) {
   let course_no = req.body.course_no;
-  console.log(req.body);
-  let sql = "SELECT * FROM COURSE C WHERE C.CourseID = ? ";
-  let inserts = [course_no];
-  db.query(sql, inserts,
+  let sql = "SELECT * FROM COURSE C, PREREQUISITE P, SECTION S WHERE C.CourseID = "+course_no
+          +" AND P.CourseIDl5 = "+course_no+" AND S.CID = "+course_no;
+  console.log(sql);
+  db.query(sql,
     (err, rows) => {
       if (err) {
         return next(err);
       }
-      console.log(rows[0]);
-      res.send(rows[0]);
+      console.log(rows);
+      res.send(rows);
     }
   );
 });

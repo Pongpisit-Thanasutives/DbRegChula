@@ -8,4 +8,11 @@ router.get('/', function (req, res) {
   });
 });
 
+router.get('/testsync', function(req, res){
+  for(let i=0;i<100;i++){
+    console.log("i = "+i);
+  }
+  console.log("i'm outside");
+});
+
 module.exports = router;
