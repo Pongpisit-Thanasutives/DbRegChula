@@ -21,6 +21,7 @@ router.get('/', function(req, res){
 		var academicYear = result[0].AcademicYearl3;
 		var term = result[0].Terml3;
 
+		// Get Payment amount
 		var sql2 = "select * from CURRICULUM where CurriculumName = " + "'" + departmentName + "'" + ";";
 		db.query(sql2, function (err, result) {	
 			if (err) {
