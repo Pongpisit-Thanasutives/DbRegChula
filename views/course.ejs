@@ -42,9 +42,9 @@
       <div class="list-group">
           <% for(let i = 0; i < data.length; i++) {%>
             <% if(i==0) {%>
-              <a href="#" class="list-group-item active"  data-courseno="<%= data[i].ID %>"><%= data[i].ID %>	<%= data[i].Initial %></a>
+              <a href="#" class="list-group-item active"  data-courseno="<%= data[i].ID %>" data-year="<%= year %>" data-sem="<%= sem %>"><%= data[i].ID %>	<%= data[i].Initial %></a>
             <% } else { %>
-              <a href="#" class="list-group-item" data-courseno="<%= data[i].ID %>"><%= data[i].ID %>	<%= data[i].Initial %></a>
+              <a href="#" class="list-group-item" data-courseno="<%= data[i].ID %>" data-year="<%= year %>" data-sem="<%= sem %>"><%= data[i].ID %>	<%= data[i].Initial %></a>
             <% } %>
           <% } %>
       </div>
@@ -70,19 +70,25 @@
                 <td class="course_detail" id="prerequisite"></td>
               </tr>
               <tr>
-                <td class="course_title"><b>วิธีการสอน</b></td>
-                <td class="course_detail" id="teachstyle"></td>
+                <td class="course_title"><b>วันสอบกลางภาค</b></td>
+                <td class="course_detail" id="midexamdate"></td>
+              </tr>
+              <tr>
+                <td class="course_title"><b>เวลาสอบกลางภาค</b></td>
+                <td class="course_detail" id="midexamtime"></td>
+              </tr>
+              <tr>
+                <td class="course_title"><b>วันสอบปลายภาค</b></td>
+                <td class="course_detail" id="examdate"></td>
+              </tr>
+              <tr>
+                <td class="course_title"><b>เวลาสอบปลายภาค</b></td>
+                <td class="course_detail" id="examtime"></td>
               </tr>
             </tbody>
         </table>
         <h4>Course Section(s)</h4>
-          <ul class="nav nav-tabs" role="tablist" id="myTab">
-            <li role="presentation" class="active"><a href="#graph-all" aria-controls="graph-all" role="tab" data-toggle="tab">ทั้งหมด</a></li>
-            <li role="presentation"><a href="#graph-st1" aria-controls="graph-st1" role="tab" data-toggle="tab">ปีล่าสุด</a></li>
-            <li role="presentation"><a href="#graph-st2" aria-controls="graph-st2" role="tab" data-toggle="tab">ปีที่แล้ว</a></li>
-          </ul>
-          <canvas id="myChart" width="400" height="200"></canvas>
-
+          <div id = "sections"></div>
           <% } else {%>
             <h1>ไม่พบข้อมูล</h1>
           <% } %>

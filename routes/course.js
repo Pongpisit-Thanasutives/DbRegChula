@@ -148,16 +148,66 @@ router.get('/', function(req, res) {
 
 router.post('/detail', function(req, res) {
   let course_no = req.body.course_no;
-  let sql = "SELECT * FROM COURSE C, PREREQUISITE P, SECTION S WHERE C.CourseID = "+course_no
-          +" AND P.CourseIDl5 = "+course_no+" AND S.CID = "+course_no;
+  let year = req.body.year;
+  let sem = req.body.sem;
+  let sql = "SELECT * FROM COURSE C, SECTION S WHERE C.CourseID = "+course_no
+          +" AND S.CID = "+course_no;
+
+  let sql2 = "SELECT * FROM PREREQUISITE P WHERE CourseIDl5 = "+course_no;
+  let sql3 = "SELECT * FROM SECTION S, TEACHDAY T WHERE S.CID = T.CIDD"
+        + " AND T.AcademicYear_sectionD = "+year+" AND T.AcademicYear_sectionD = S.AcademicYear_section"
+        + " AND T.Term_sectionD = " + sem + " AND T.Term_sectionD = S.Term_section AND S.SectionNumber = T.SectionNumberD ORDER BY S.SectionNumber";
   console.log(sql);
   db.query(sql,
     (err, rows) => {
       if (err) {
         return next(err);
       }
-      console.log(rows);
-      res.send(rows);
+      db.query(sql2,
+        (err, rows2) => {
+          if(err){
+            return next(err);
+          }
+          var info = [];
+          for(let i=0;i<rows2.length;i++){
+            info.push(rows2[i].PrecourseIDl5);
+          }
+          rows[0].Prerequisite = info;
+          db.query(sql3,
+            (err, rows3) => {
+              if(err){
+                return next(err);
+              }
+              var prev = null;
+              var idx = 0;
+              rows[0]['Sections'] = [];
+              for(let i=0;i<rows3.length;i++){
+                if(i == 0){
+                  prev = rows3[0].SectionNumber;
+                  rows[0]['Sections'].push([]);
+                }
+                if(prev != rows3[i].SectionNumber){
+                  prev = rows3[0].SectionNumber;
+                  rows[0]['Sections'].push([]);
+                  idx++;
+                }
+                let tmp = {};
+                tmp.SectionNumber = rows3[i].SectionNumber;
+                tmp.SecStatus = rows3[i].SecStatus;
+                tmp.StudentCapacity = rows3[i].StudentCapacity;
+                tmp.NumberOfStudent = rows3[i].NumberOfStudent;
+                tmp.TDayD = rows3[i].TDayD;
+                tmp.TeachTimeStD = rows3[i].TeachTimeStD;
+                tmp.TeachTimeFnD = rows3[i].TeachTimeFnD;
+                tmp.TeachStyleD = rows3[i].TeachStyleD;
+                rows[0]['Sections'][idx].push(tmp);
+              }
+              console.log(rows);
+              res.send(rows);
+            }
+          );
+        }
+      );
     }
   );
 });
