@@ -59,20 +59,31 @@ div.relative {
   </div>
 
   <div class="column right" style="background-color:#bbb;">
-  <p>ชื่อ <%- name %></p>
-  <p>นามสกุล <%- lastname %></p>
-  <p>เพศ <%- sex %></p>
-  <p>เลขประจำตัวประชาชน <%- nationalid %></p>
-  <p>รหัสนิสิต <%- studentid %></p>
-  <p>ระดับการศึกษา ปริญญาตรี</p>
-  <p>ชั้นปี 3</p>
-  <p>คณะ <%- facultyname %></p>
-  <p>ภาควิชา <%- departmentname %></p>
-  <p>กรุ๊ปเลือด <%- bloodgroup %></p>
-  <p>ที่อยู่ ถนน <%- road %> เขต <%- district %> แขวง <%- subdistrict %> จังหวัด <%- provice %> เลขไปรษณีย์ <%- postalcode %></p>
-  <p>อีเมลล์ <%- email %></p>
+  <p><b>ชื่อ</b> <%- name %></p>
+  <p><b>นามสกุล</b> <%- lastname %></p>
+  <p><b>เพศ</b> <%- sex %></p>
+  <p><b>เลขประจำตัวประชาชน</b> <%- nationalid %></p>
+  <p><b>รหัสประจำตัวนิสิต</b> <%- studentid %></p>
+  <p><b>ระดับการศึกษา</b> ปริญญาตรี</p>
+  <p><b>ชั้นปี</b> 3</p>
+  <p><b>คณะ</b> <%- facultyname %></p>
+  <p><b>ภาควิชา</b> <%- departmentname %></p>
+  <p><b>กรุ๊ปเลือด</b> <%- bloodgroup %></p>
+  <p><b>ที่อยู่</b> ถนน <%- road %> เขต <%- district %> แขวง <%- subdistrict %> จังหวัด <%- provice %> เลขไปรษณีย์ <%- postalcode %></p>
+  <p><b>อีเมลล</b> <%- email %></p>
   </div>
+  <div>
+  <pre>
+  <p><b>รายวิชาที่ท่านได้ลงทะเบียนและรอการยอมรับ</b></p>
+  <%- allrequestsubjects %> 
+  </pre>
 
+  <pre>
+  <p><b>รายวิชาที่ท่านได้ลงทะเบียนเรียน</b></p>
+  <%- allstudysubjects %> 
+  </pre>
+
+  </div>
 </div>
 </div>
 
