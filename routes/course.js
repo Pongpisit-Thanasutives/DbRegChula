@@ -13,10 +13,6 @@ router.get('/', function(req, res) {
     console.log(req.query.semester);
     var year = req.query.semester[0].split("/")[0];
     var sem = req.query.semester[0].split("/")[1];
-    // let sql =  "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM COURSE C WHERE C.CourseID LIKE ? AND C.CourseInitial LIKE ? LIMIT 14";
-    // let sql = "SELECT S.CID AS ID, C.CourseInitial AS Initial FROM SECTION S, COURSE C WHERE C.CourseID = S.CID AND C.CourseID LIKE "
-    //           + courseID + "AND C.CourseInitial LIKE "+courseName + " AND S.AcademicYear_section = " + year + " AND Term_section = "
-              // + sem + " LIMIT 14";
     let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
               + year + " AND Term_section = "+ sem +" AND C.CourseID LIKE "+courseID+" AND C.CourseInitial LIKE "+courseName+" ORDER BY C.CourseID LIMIT 14";
     db.query(sql,
@@ -208,48 +204,6 @@ router.post('/detail', function(req, res) {
           );
         }
       );
-    }
-  );
-});
-
-router.post('/graph', function(req,res){
-  let course_no = req.body.course_no;
-  let sql =  baseSQL2+"where course_no = ? group by grade ";
-  let inserts = [course_no];
-  db.query(sql, inserts,
-    (err, rows) => {
-      if (err) {
-        return next(err);
-      }
-      res.send(rows)
-    }
-  );
-});
-
-router.post('/graph2', function(req,res){
-  let course_no = req.body.course_no;
-  let sql =  baseSQL2+"where course_no = ? and year = '2016' group by grade ";
-  let inserts = [course_no];
-  db.query(sql, inserts,
-    (err, rows) => {
-      if (err) {
-        return next(err);
-      }
-      res.send(rows)
-    }
-  );
-});
-
-router.post('/graph3', function(req,res){
-  let course_no = req.body.course_no;
-  let sql =  baseSQL2+"where course_no = ? and year = '2015' group by grade ";
-  let inserts = [course_no];
-  db.query(sql, inserts,
-    (err, rows) => {
-      if (err) {
-        return next(err);
-      }
-      res.send(rows)
     }
   );
 });

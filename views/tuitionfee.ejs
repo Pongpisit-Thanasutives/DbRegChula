@@ -14,19 +14,15 @@
 
 <div class="container">
 	<h3>ข้อมูลทั่วไปของนิสิต</h3>
-	<pre><b>ชื่อ นามสกุล</b> <%- fullname %></pre>
-	<pre><b>ระดับ</b> ปริญญาตรี</pre>
-	<pre><b>คณะ</b> <%- facultyname %> <b>ภาควิชา</b> <%- departmentname %></pre>
-	<pre><b>หลักสูตร</b> <%- curriculuminfo %></pre>
+	<pre><b>ชื่อ นามสกุล</b> <%- fullname %></br><b>ระดับ</b> ปริญญาตรี </br><b>คณะ</b> <%- facultyname %> <b>ภาควิชา</b> <%- departmentname %></br><b>หลักสูตร</b> <%- curriculuminfo %></pre>
+  <h3>วิธีการชำระ</h3>
+	<pre>ผ่านการหักจากเงินฝากธนาคาร</pre>
 	<hr>
 	<h3>ค่าเล่าเรียน</h3>
-	<pre><b>เทอม/ปี</b> <%- termandyear %></pre>
-	<pre><b>ทั้งหมด</b> <%- payamount %></pre>
-	<pre><b>ชำระแล้ว</b> <%- paid %></pre>
-	<pre><b>ค้างชำระ</b> <%- left %></pre>
+  <% for(var i=0; i < payInfo.length; i++) { %>
+    <%- payInfo[i]; %>
+  <% } %>
 	<hr>
-	<h3>วิธีการชำระ</h3>
-	<pre>ผ่านการหักจากเงินฝากธนาคาร</pre>
 </div>
 
 <%- include('common/view_end', {

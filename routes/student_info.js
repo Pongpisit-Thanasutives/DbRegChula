@@ -11,7 +11,7 @@ router.get('/', function(req, res){
   var facultyCode = req.user.StudentID.slice(-2);
   var facultyName = '';
   var sql = 'select * from FACULTY, CURRICULUM_STUDENT_INFO where FACULTY.FacultyCode = ' + facultyCode + ' and CURRICULUM_STUDENT_INFO.StudentID4 = ' + req.user.StudentID + ';';
-  
+
   db.query(sql, function (err, result) {
       if (err) {
         return next(err);
