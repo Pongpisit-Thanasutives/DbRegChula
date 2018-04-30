@@ -4,7 +4,8 @@ const db = require('../db');
 const { queryAsPromise } = require('../db-helper');
 const { buildDataTableEndpoint } = require('./helper/data-table-helper');
 const router = express.Router();
-const pdf = require('html-pdf');
+const fs = require('fs');
+const pdf =  require('dynamic-html-pdf');
 
 router.get('/', function(req, res){
   	// Get Faculty name + Department name
@@ -44,7 +45,7 @@ router.get('/', function(req, res){
         str += "<b>ค้างชำระ</b> "+leftAmount;
         if(result2[i].PaymentStatus == "PAID"){
           str += "</br><a href='./tuitionfee/receipt?name="+req.user.StudentFirstName+' '+req.user.StudentLastName
-          +"&faculty="+facultyName+"&department="+departmentName+"&curriculum="+curriculumType
+          +"&id="+req.user.StudentID+"&faculty="+facultyName+"&department="+departmentName+"&curriculum="+curriculumType
           +"&term="+result2[i].Terml3+"&year="+result2[i].AcademicYearl3+"&payamount="+paymentAmount+"'>"
           +"<button type='button' class='btn btn-primary' style='font-family: sans-serif;'> Receipt </button></a></pre>";
         }
@@ -71,8 +72,26 @@ router.get('/', function(req, res){
 });
 
 router.get('/receipt', function(req, res){
-  var str = "<!DOCTYPE html><html><body><h1>Receipt</h1>";
-  str += "</body></html>";
+    var html = fs.readFileSync('./views/receipt.html', 'utf8');
+    var options = {
+      format: "A4",
+      orientation: "portrait",
+      border: "10mm"
+    };
+    var document = {
+    template: html,
+    context: {
+        options: req.query
+    },
+    path: "./public/receipts/"+req.query.id+".pdf"
+  };
+  pdf.create(document, options)
+    .then(resp => {
+        res.redirect("/static/receipts/"+req.query.id+".pdf");
+    })
+    .catch(error => {
+        console.error(error)
+    });
 });
 
 module.exports = router;

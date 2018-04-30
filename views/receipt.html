@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link href="https://fonts.googleapis.com/css?family=Sriracha" rel="stylesheet">
+    <style>
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > thead > tr > th {
+      border: none;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>RegChula48</h1>
+    <h3>ใบเสร็จรับเงินชำระค่าเรียนประจำภาคการศึกษา {{options.year}}/{{options.term}} </h3>
+    <p>254 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน กทม. 10330</p>
+    <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td class="course_title col-md-2"><b>หมายเลขประจำตัวนิสิต</b></td>
+            <td class="course_detail" id="creditset">{{options.id}}</td>
+          </tr>
+          <tr>
+            <td class="course_title"><b>ชื่อ-นามสกุล</b></td>
+            <td class="course_detail" id="name_en">{{options.name}}</td>
+          </tr>
+          <tr>
+            <td class="course_title"><b>คณะ</b></td>
+            <td class="course_detail" id="prerequisite">{{options.faculty}}</td>
+          </tr>
+          <tr>
+            <td class="course_title"><b>ภาควิชา</b></td>
+            <td class="course_detail" id="midexamdate">{{options.department}}</td>
+          </tr>
+          <tr>
+            <td class="course_title"><b>หลักสูตร</b></td>
+            <td class="course_detail" id="midexamtime">{{options.curriculum}}</td>
+          </tr>
+          <tr>
+            <td class="course_title"><b>เป็นจำนวนเงินทั้งสิ้น</b></td>
+            <td class="course_detail" id="examtime">{{options.payamount}}</td>
+          </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
