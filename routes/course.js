@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
     console.log(req.query.semester);
     var year = req.query.semester[0].split("/")[0];
     var sem = req.query.semester[0].split("/")[1];
-    let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
+    let sql = "SELECT DISTINCT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
               + year + " AND Term_section = "+ sem +" AND C.CourseID LIKE "+courseID+" AND C.CourseInitial LIKE "+courseName+" ORDER BY C.CourseID LIMIT 14";
     db.query(sql,
       (err, rows) => {
@@ -44,7 +44,7 @@ router.get('/', function(req, res) {
   } else if(courseID && courseID.length > 0 && !courseName){
     var year = req.query.semester[0].split("/")[0];
     var sem = req.query.semester[0].split("/")[1];
-    let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
+    let sql = "SELECT DISTINCT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
               + year + " AND Term_section = "+ sem +" AND C.CourseID LIKE ? ORDER BY C.CourseID LIMIT 14";
     let inserts = [courseID.trim() + '%'];
     db.query(sql, inserts,
@@ -75,7 +75,7 @@ router.get('/', function(req, res) {
   } else if(!courseID && courseName && courseName.length > 0){
     var year = req.query.semester[0].split("/")[0];
     var sem = req.query.semester[0].split("/")[1];
-    let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
+    let sql = "SELECT DISTINCT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
               + year + " AND Term_section = "+ sem +" AND C.CourseInitial LIKE ? ORDER BY C.CourseID LIMIT 14";
     let inserts = ['%' + courseName.trim() + '%'];
     db.query(sql, inserts,
@@ -112,7 +112,7 @@ router.get('/', function(req, res) {
       year = 2018;
       sem = 1;
     }
-    let sql = "SELECT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
+    let sql = "SELECT DISTINCT C.CourseID AS ID, C.CourseInitial AS Initial FROM Course C, Section S WHERE C.CourseID = S.CID AND S.AcademicYear_section = "
               + year + " AND Term_section = "+ sem +" ORDER BY C.CourseID LIMIT 14";
     console.log(sql);
     db.query(sql,
@@ -147,13 +147,12 @@ router.post('/detail', function(req, res) {
   let year = req.body.year;
   let sem = req.body.sem;
   let sql = "SELECT * FROM COURSE C, SECTION S WHERE C.CourseID = "+course_no
-          +" AND S.CID = "+course_no;
+          +" AND S.CID = "+course_no+" AND AcademicYear_section = "+year+" AND Term_section = "+sem;
 
   let sql2 = "SELECT * FROM PREREQUISITE P WHERE CourseIDl5 = "+course_no;
   let sql3 = "SELECT * FROM SECTION S, TEACHDAY T WHERE S.CID = T.CIDD"
         + " AND T.AcademicYear_sectionD = "+year+" AND T.AcademicYear_sectionD = S.AcademicYear_section"
         + " AND T.Term_sectionD = " + sem + " AND T.Term_sectionD = S.Term_section AND S.SectionNumber = T.SectionNumberD ORDER BY S.SectionNumber";
-  console.log(sql);
   db.query(sql,
     (err, rows) => {
       if (err) {

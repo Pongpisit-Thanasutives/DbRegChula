@@ -41,6 +41,7 @@ $(document).ready(function() {
       $('#sections').html('');
       for(let i=0;i<result[0].Sections.length;i++){
         console.log("i = "+i);
+        console.log(result[0].Sections);
         var e = $(document.createElement('table'))
              .attr("class", 'table table-bordered');
         var content = '<tbody><tr><td class="course_title col-md-2"><b>Section Number</b></td>';
