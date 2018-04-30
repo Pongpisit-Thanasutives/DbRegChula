@@ -1,56 +1,217 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html>
 <head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/css/common.css">
-    <link href="https://fonts.googleapis.com/css?family=Sriracha" rel="stylesheet">
+    <meta charset="utf-8">
     <style>
-    .table-borderless > tbody > tr > td,
-    .table-borderless > tbody > tr > th,
-    .table-borderless > tfoot > tr > td,
-    .table-borderless > tfoot > tr > th,
-    .table-borderless > thead > tr > td,
-    .table-borderless > thead > tr > th {
-      border: none;
+    .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
+
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
+
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
+
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.item td{
+        border-bottom: 1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+
+    /** RTL **/
+    .rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
+
+    .rtl table {
+        text-align: right;
+    }
+
+    .rtl table tr td:nth-child(2) {
+        text-align: left;
     }
     </style>
 </head>
 
 <body>
-    <h1>RegChula48</h1>
-    <h3>ใบเสร็จรับเงินชำระค่าเรียนประจำภาคการศึกษา {{options.year}}/{{options.term}} </h3>
-    <p>254 ถนนพญาไท แขวงวังใหม่ เขตปทุมวัน กทม. 10330</p>
-    <table class="table table-borderless">
-        <tbody>
-          <tr>
-            <td class="course_title col-md-2"><b>หมายเลขประจำตัวนิสิต</b></td>
-            <td class="course_detail" id="creditset">{{options.id}}</td>
-          </tr>
-          <tr>
-            <td class="course_title"><b>ชื่อ-นามสกุล</b></td>
-            <td class="course_detail" id="name_en">{{options.name}}</td>
-          </tr>
-          <tr>
-            <td class="course_title"><b>คณะ</b></td>
-            <td class="course_detail" id="prerequisite">{{options.faculty}}</td>
-          </tr>
-          <tr>
-            <td class="course_title"><b>ภาควิชา</b></td>
-            <td class="course_detail" id="midexamdate">{{options.department}}</td>
-          </tr>
-          <tr>
-            <td class="course_title"><b>หลักสูตร</b></td>
-            <td class="course_detail" id="midexamtime">{{options.curriculum}}</td>
-          </tr>
-          <tr>
-            <td class="course_title"><b>เป็นจำนวนเงินทั้งสิ้น</b></td>
-            <td class="course_detail" id="examtime">{{options.payamount}}</td>
-          </tr>
-        </tbody>
-    </table>
-</body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <h3>RegChula48</h3>
+                            </td>
 
+                            <td>
+                                Receipt #: 123<br>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                Chulalongkorn University<br>
+                                254 Phayathai Road<br>
+                                Pathumwan, Bangkok<br>
+                                Thailand. 10330
+                            </td>
+
+                            <td>
+                                chula@chula.ac.th
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    ข้อมูลผู้จ่ายเงิน
+                </td>
+
+                <td>
+
+                </td>
+            </tr>
+
+            <tr class="details">
+                <td>
+                    ชื่อ-นามสกุล
+                </td>
+
+                <td>
+                    {{options.name}}
+                </td>
+            </tr>
+
+            <tr class="details">
+                <td>
+                    รหัสนิสิต
+                </td>
+
+                <td>
+                    {{options.id}}
+                </td>
+            </tr>
+            <tr class="details">
+                <td>
+                    คณะ
+                </td>
+
+                <td>
+                    {{options.faculty}}
+                </td>
+            </tr>
+            <tr class="details">
+                <td>
+                    ภาควิชา
+                </td>
+
+                <td>
+                    {{options.department}}
+                </td>
+            </tr>
+            <tr class="details">
+                <td>
+                    หลักสูตร
+                </td>
+
+                <td>
+                    {{options.curriculum}}
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    รายการ
+                </td>
+
+                <td>
+
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    ค่าการศึกษาประจำภาคการศึกษา ({{options.year}}/{{options.term}})
+                </td>
+
+                <td>
+                    {{options.payamount}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
 </html>
