@@ -13,12 +13,13 @@
 }) %>
 
 <div class="container">
-<form action="/withdraw" method="POST">
-
-	Course number <input type="text" name="course_no"><br>
-	<input type="submit" value="Submit">
-
-</form>
+  <form action="/withdraw" class="form-horizontal" method="POST">
+    <label class="col-sm-2 control-label">Course ID :</label>
+    <div class="col-sm-5">
+      <input class="form-control" type="text" name="course_no"><br>
+    </div>
+  	<input type="submit" class="btn btn-md btn-success" value="Submit">
+  </form>
 </div>
 
 <%- include('common/view_end', {
